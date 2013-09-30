@@ -1,0 +1,13 @@
+/* demo.css */
+
+#demo p {
+    position: relative;
+    width: 500px;
+}
+
+.image-share {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

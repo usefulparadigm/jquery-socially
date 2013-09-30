@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="socially.css" />
+  <link rel="stylesheet" href="demo.css" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <div id="demo">
+        <p><img src="http://fixnation.org/wordpress/wp-content/uploads/2010/02/iStock_dogSilverTabby.jpg" width="500"></p>
+        <p><img src="http://www.tastyislandhawaii.com/images12/inspire2012/cat_and_dog07.jpg" width="500"></p>
+        <p><img src="http://images4.fanpop.com/image/photos/16800000/Dog-and-Cat-Wallpaper-teddybear64-16834786-1280-800.jpg" width="500"></p>
+    </div>
+
+  <script src="vendor/jquery.urlshortener.js"></script>
+  <script src="jquery.socially.js"></script>
+  <script>
+  $(function() {
+    $('img').socially();
+    $('#demo p').hover(
+        function() { $(this).find('.image-share').fadeIn(); },
+        function() { $(this).find('.image-share').fadeOut(); }
+    );
+  });
+  </script>
+</body>
+</html>
