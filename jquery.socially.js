@@ -3,31 +3,37 @@
 ;(function($) {
     "use strict";
     
-    $.fn.socially = function(option, settings) {
+    $.fn.socially = function(options) {
+        
+        // default options
+        var settings = $.extend({
+            service: ['facebook', 'twitter', 'google', 'pinterest'],
+            itemClass: '',
+            shareText: 'Share This!',
+            popup: true
+        }, options);
+        
+        // console.log(settings);
 
-        var shareHTML = '<ul class="image-share">'
-                        +'<li><a href="#" class="twitter" data-share="twitter" target="_blank" alt="twitter">Twitter</a></li>'        
-                        +'<li><a href="#" class="facebook" data-share="facebook" target="_blank" alt="facebook">Facebook</a></li>'        
-                        +'<li><a href="#" class="google" data-share="google" target="_blank" alt="google">Google</a></li>'        
-                        +'<li><a href="#" class="pinterest" data-share="pinterest" target="_blank" alt="pinterest">Pinterest</a></li>'        
-                        +'</ul>';
+        var shareHTML = '<ul class="socially">';
+        $.each(settings.service, function(index, s) {
+            shareHTML += '<li><a href="#" class="'+s+' '+settings.itemClass+'" data-share="'+s+'" target="_blank" alt="'+s+'">'+s+'</a></li>';
+        });
+        shareHTML += '</ul>';
         
         var shareLinks = {
             twitter: {
                 link: 'http://twitter.com/share?text={text}&url={url}',
-                shortUrl: true,
-                text: 'Shrare This! '
+                shortUrl: true
             },
             facebook: {
                 link: 'http://www.facebook.com/sharer.php?u={url}&t={text}',
-                text: 'Shrare This! '
             },
             google: {
                 link: 'https://plus.google.com/share?url={url}'
             },
             pinterest: {
                 link: 'http://www.pinterest.com/pin/create/button/?url={url}&media={url}&description={text}',    
-                text: 'Shrare This! '
             }
         };                    
         
@@ -46,21 +52,26 @@
         
         $(function() {
 
-            $('.image-share a').on('click', document, function() {
+            $('.socially a').on('click', document, function() {
                 var $this = $(this);
                 var imageUrl = $this.closest('ul').siblings('img').attr('src');
                 var shareLink = shareLinks[$(this).data('share')];
                 var shareUrl = shareLink.link;
-                var shareText = shareLink.text || '';
+                var shareText = settings.shareText || '';
                 if (shareLink.shortUrl) { imageUrl = shortenUrl(imageUrl); }
                 // console.log(imageUrl);
                 shareUrl = shareUrl.replace(/{url}/gi, imageUrl);
                 shareUrl = shareUrl.replace(/{text}/gi, shareText);
             
                 // console.log(shareUrl);
-                // $this.attr('href', shareUrl);
-                popupWindow(shareUrl, 'Share', shareLink.width, shareLink.height);
-                return false;
+
+                if (settings.popup) {
+                    popupWindow(shareUrl, 'Share', shareLink.width, shareLink.height);
+                    return false;
+                    
+                } else {
+                    $this.attr('href', shareUrl);
+                }
             });
 
         });
