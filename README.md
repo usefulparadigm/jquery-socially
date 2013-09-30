@@ -2,7 +2,7 @@ jquery.socially
 =====
 A tiny jQuery plugin for dynamically adding social media share links to images
 
-![screenshot][screenshot.png]
+![screenshot](screenshot.png)
 
 Usage:
 -----
@@ -13,8 +13,11 @@ Usage:
 Dependencies:
 -----
 
+- jQuery
+- [jQuery-URL-Shortener](https://github.com/hayageek/jQuery-URL-shortener)
     
 
 Credits:
 -----
 
+- [Simple Icons](http://simpleicons.org/) by Dan Leech under the Free Art License.
