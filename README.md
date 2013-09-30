@@ -14,7 +14,7 @@ Dependencies:
 -----
 
 - jQuery
-- [jQuery-URL-Shortener](https://github.com/hayageek/jQuery-URL-shortener)
+- [jQuery-URL-shortener](https://github.com/hayageek/jQuery-URL-shortener)
     
 
 Credits:
