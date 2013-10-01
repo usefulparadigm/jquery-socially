@@ -10,16 +10,19 @@
             service: ['facebook', 'twitter', 'google', 'pinterest'],
             itemClass: '',
             shareText: 'Share This!',
-            popup: true
+            popup: true,  // popup or direct link 
+            html5: false  // wrap with <figure> tag if true
         }, options);
         
         // console.log(settings);
 
-        var shareHTML = '<ul class="socially">';
+        var shareHtml = '<ul class="socially">';
+        if (settings.html5) shareHtml = '<figcaption>' + shareHtml;
         $.each(settings.service, function(index, s) {
-            shareHTML += '<li><a href="#" class="'+s+' '+settings.itemClass+'" data-share="'+s+'" target="_blank" alt="'+s+'">'+s+'</a></li>';
+            shareHtml += '<li><a href="#" class="'+s+' '+settings.itemClass+'" data-share="'+s+'" target="_blank" alt="'+s+'">'+s+'</a></li>';
         });
-        shareHTML += '</ul>';
+        shareHtml += '</ul>';
+        if (settings.html5) shareHtml += '</figcaption>';
         
         var shareLinks = {
             twitter: {
@@ -54,7 +57,8 @@
 
             $('.socially a').on('click', document, function() {
                 var $this = $(this);
-                var imageUrl = $this.closest('ul').siblings('img').attr('src');
+                var imageUrl = $this.closest('.socially-wrap').find('img').attr('src');
+                // console.log(imageUrl);
                 var shareLink = shareLinks[$(this).data('share')];
                 var shareUrl = shareLink.link;
                 var shareText = settings.shareText || '';
@@ -77,8 +81,9 @@
         });
 
         return this.each(function() {
-            $(this).after(shareHTML); 
-            // $(this).wrap('<figure />').append(shareHTML);
+            // $(this).after(shareHtml); 
+            var wrap = settings.html5 ? 'figure' : 'div';
+            $(this).wrap('<'+wrap+' class="socially-wrap" />').after(shareHtml);
         });
     };
 

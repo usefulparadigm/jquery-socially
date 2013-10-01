@@ -14,7 +14,8 @@ Usage:
         service: ['facebook', 'twitter', 'google', 'pinterest'],
         itemClass: '',
         shareText: 'Share This!',
-        popup: true
+        popup: true,  // popup or direct link 
+        html5: false  // wrap with <figure> tag if true
     }, options);
 
 
@@ -34,5 +35,4 @@ Credits:
 Todos:
 -----
 
-- Html5 figure tag support (for easy caption integration)    
-
+- Supporting more social medias 

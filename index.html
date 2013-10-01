@@ -19,10 +19,10 @@
   <script src="jquery.socially.js"></script>
   <script>
   $(function() {
-    $('img').socially();
+    $('#demo img').socially({html5: true});
     $('#demo p').hover(
-        function() { $(this).find('.socially').fadeIn(); },
-        function() { $(this).find('.socially').fadeOut(); }
+        function() { $(this).find('.socially').stop().animate({'bottom': '0px'}); },
+        function() { $(this).find('.socially').stop().animate({'bottom': '-100px'}); }
     );
   });
   </script>
